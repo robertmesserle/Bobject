@@ -54,15 +54,12 @@ describe( 'Bobjects', function () {
 
       it( 'should allow get_type to work out of context', function () {
         var get_type = moose.get_type;
-        console.log( 'test: get_type: ', get_type.toString() );
         expect( get_type() ).toBe( 'moose' );
       } );
 
     } );
 
     describe( 'Bind: [ string ]', function () {
-
-      console.log( 'bout to get me some array action' );
 
       var Animal = new Bobject( {
         Bind: [ 'get_type' ],
