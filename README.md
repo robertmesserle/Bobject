@@ -1,6 +1,6 @@
 # Bobject 1.0
 
-Bobject is a helper for creating classes in JavaScript.  It cleans up the prototype mess a bit and leaves you with simpler, more readable code.
+Bobject is a helper for creating classes in JavaScript.  It cleans up the prototype mess and leaves you with simpler, more readable code.
 
 ## Basic Usage
 
@@ -68,15 +68,15 @@ Bobject provides you with a few options using the ```Bind``` property.
 
 ```javascript
 var Animal = new Bobject( {
-  Bind: 'get_type',
+  Bind: 'getType',
   constructor: function ( type ) {
     this.type = type;
   },
-  get_type: function () {
+  getType: function () {
     return this.type;
   }
 } );
 var moose = new Animal( 'moose' );
-var get_type_copy = moose.get_type; // Won't work without Bind
-get_type_copy();                    // Thanks to Bind, returns 'moose' as expected
+var getTypeCopy = moose.getType;  // Won't work without Bind
+getTypeCopy();                    // Thanks to Bind, returns 'moose' as expected
 ```
