@@ -36,5 +36,22 @@ Along with just cleaning up the syntax a little, Bobject adds some nice features
 
 ### Inheritance
 
-You can
+```javascript
+var Animal = new Bobject( {
+  constructor: function () {
+    this.animal = true;
+  }
+} );
 
+var Donkey = new Bobject( {
+  Extends: Animal,
+  constructor: function () {
+    this.Super(); // calls the Animal constructor
+    this.type = 'donkey';
+  }
+} );
+
+var donkey = new Donkey();
+donkey.animal;  // evaluates to true
+donkey.type;    // evaluates to 'donkey'
+```
