@@ -7,6 +7,7 @@
   function Bobject ( obj ) {
     this.Class = function () {
       handle_bind.call( this );
+      handle_super.call( this );
       if ( typeof obj.constructor === 'function' ) obj.constructor.apply( this, arguments );
     };
     this.Class.prototype        = clone( obj );
@@ -24,10 +25,10 @@
     },
     extend: function ( Super ) {
       Super = Super.prototype || Super;
-      this.Class.prototype.Super = Super.constructor || {};
-      this.each( Super, function ( key, val ) {
-        this.Class.prototype.Super[ key ] = val;
+      this.Class.prototype.Super = function () { Super.constructor && Super.constructor.apply( this, arguments ); };
+      each.call( this, Super, function ( key, val ) {
         if ( !this.Class.prototype.hasOwnProperty( key ) ) this.Class.prototype[ key ] = val;
+        else this.Class.prototype.Super[ key ] = val;
       } );
     }
   };
@@ -37,6 +38,10 @@
   window.Bobject = Bobject;
 
   //-- utility functions
+
+  function handle_super () {
+    each.call( this, this.Super, function ( key, val ) { this.Super[ key ] = this.bind( val ) } );
+  }
 
   function handle_bind () {
     var methods = [];
