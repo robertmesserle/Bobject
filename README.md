@@ -55,3 +55,32 @@ var donkey = new Donkey();
 donkey.animal;  // evaluates to true
 donkey.type;    // evaluates to 'donkey'
 ```
+
+### Bind
+
+One of the problems with OOP in JavaScript is maintaining the 'this' keyword.  This is solved by using $.proxy() in jQuery, or _.bind() in underscore.js.
+
+Bobject provides you with a few options using the ```Bind``` property.
+
+**true** or **"all"**: Binds all functions in the prototype to the object. 
+**'name_of_function'**: Binds a single function
+**[ 'name_of_function', .. ]**: Binds multiple functions by name
+
+Coming soon:
+
+**/regexp/**: Will bind functions that match a regular expression
+
+```javascript
+var Animal = new Bobject( {
+  Bind: true,
+  constructor: function ( type ) {
+    this.type = type;
+  },
+  get_type: function () {
+    return this.type;
+  }
+} );
+var moose = new Animal( 'moose' );
+var get_type_copy = moose.get_type; // Won't work without Bind
+get_type_copy();                    // Thanks to Bind, returns 'moose' as expected
+```
