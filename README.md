@@ -62,17 +62,17 @@ One of the problems with OOP in JavaScript is maintaining the 'this' keyword.  T
 
 Bobject provides you with a few options using the ```Bind``` property.
 
-**true** or **"all"**: Binds all functions in the prototype to the object. 
-**'name_of_function'**: Binds a single function
-**[ 'name_of_function', .. ]**: Binds multiple functions by name
+```true``` or ```"all"```: Binds all functions in the prototype to the object.  
+```'name_of_function'```: Binds a single function  
+```[ ... ]```: An array of strings identifying which functions to bind
 
 Coming soon:
 
-**/regexp/**: Will bind functions that match a regular expression
+```/regexp/```: Will bind functions that match a regular expression
 
 ```javascript
 var Animal = new Bobject( {
-  Bind: true,
+  Bind: 'get_type',
   constructor: function ( type ) {
     this.type = type;
   },
