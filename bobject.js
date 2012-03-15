@@ -1,6 +1,10 @@
 ( function () {
 
-  window.Bobject = function Bobject ( obj ) {
+  'use strict';
+
+  //-- core object
+
+  function Bobject ( obj ) {
     this.Class = function () {
       handle_bind.call( this );
       if ( typeof obj.constructor === 'function' ) obj.constructor.apply( this, arguments );
@@ -28,16 +32,20 @@
     }
   };
 
+  //-- make object globally accessible
+
+  window.Bobject = Bobject;
+
+  //-- utility functions
+
   function handle_bind () {
-    console.log( this.Bind );
     var methods = [];
     //-- set list of methods
     if ( this.Bind === true || this.Bind === 'all' )  methods = this.Static;
     else if ( this.Bind instanceof Array )            methods = this.Bind;
     else if ( typeof this.Bind === 'string' )         methods = [ this.Bind ];
     else return;
-    console.log( methods, methods instanceof Array );
-    //bind methods
+    //-- bind methods
     each.call( this, methods, function ( key, val ) {
       if ( methods instanceof Array ) this[ val ] = this.bind( val );
       else this[ key ] = this.bind( val );
@@ -53,9 +61,8 @@
   }
 
   function each ( obj, callback ) {
-    var i;
-    if ( obj instanceof Array ) for ( i = 0, len = obj.length; i < len; i++ ) callback.call( this, i, obj[ i ] );
-    else for ( i in obj ) if ( obj.hasOwnProperty( i ) ) callback.call( this, i, obj[ i ] );
+    if ( obj instanceof Array ) for ( var i = 0, len = obj.length; i < len; i++ ) callback.call( this, i, obj[ i ] );
+    else for ( var key in obj ) if ( obj.hasOwnProperty( key ) ) callback.call( this, key, obj[ key ] );
   }
 
   function clone ( obj ) {
