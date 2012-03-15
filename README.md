@@ -66,10 +66,6 @@ Bobject provides you with a few options using the ```Bind``` property.
 ```String```: Binds a single function  
 ```Array```: An array of strings identifying which functions to bind
 
-Coming soon:
-
-```/regexp/```: Will bind functions that match a regular expression
-
 ```javascript
 var Animal = new Bobject( {
   Bind: 'get_type',
