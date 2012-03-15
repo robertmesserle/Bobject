@@ -46,9 +46,9 @@
   function handle_bind () {
     var methods = [];
     //-- set list of methods
-    if ( this.Bind === true || this.Bind === 'all' )  methods = this.Static;
-    else if ( this.Bind instanceof Array )            methods = this.Bind;
-    else if ( typeof this.Bind === 'string' )         methods = [ this.Bind ];
+    if ( this.Bind === true )                 methods = this.Static;
+    else if ( this.Bind instanceof Array )    methods = this.Bind;
+    else if ( typeof this.Bind === 'string' ) methods = [ this.Bind ];
     else return;
     //-- bind methods
     each.call( this, methods, function ( key, val ) {

@@ -62,9 +62,9 @@ One of the problems with OOP in JavaScript is maintaining the 'this' keyword.  T
 
 Bobject provides you with a few options using the ```Bind``` property.
 
-```true``` or ```"all"```: Binds all functions in the prototype to the object.  
-```'name_of_function'```: Binds a single function  
-```[ ... ]```: An array of strings identifying which functions to bind
+```Boolean (true)```: Binds all functions in the prototype to the object.  
+```String```: Binds a single function  
+```Array```: An array of strings identifying which functions to bind
 
 Coming soon:
 
