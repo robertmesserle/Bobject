@@ -8,11 +8,12 @@
     this.Class = function () {
       handle_bind.call( this );
       handle_super.call( this );
-      if ( typeof obj.constructor === 'function' ) obj.constructor.apply( this, arguments );
+      if ( typeof obj.initialize === 'function' ) obj.initialize.apply( this, arguments );
     };
     this.Class.prototype        = clone( obj );
     this.Class.prototype.Static = this.Class.prototype;
     this.Class.prototype.bind   = this.bind;
+    this.Class.prototype.constructor = this.Class;
 
     if ( obj.Extends ) this.extend( obj.Extends );
 
@@ -25,7 +26,7 @@
     },
     extend: function ( Super ) {
       Super = Super.prototype || Super;
-      this.Class.prototype.Super = function () { Super.constructor && Super.constructor.apply( this, arguments ); };
+      this.Class.prototype.Super = function () { Super.initialize && Super.initialize.apply( this, arguments ); };
       each.call( this, Super, function ( key, val ) {
         if ( !this.Class.prototype.hasOwnProperty( key ) ) this.Class.prototype[ key ] = val;
         else this.Class.prototype.Super[ key ] = val;
