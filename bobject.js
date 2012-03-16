@@ -2,6 +2,15 @@
 
   'use strict';
 
+  function BaseObject () {}
+
+  function Args () { this.val = arguments; }
+  Args.prototype.constructor = Args;
+
+  function ExtendedArgs () {}
+  ExtendedArgs.prototype = new Args();
+  ExtendedArgs.prototype.constructor = ExtendedArgs;
+
   //-- core object
 
   function Bobject ( obj ) {
