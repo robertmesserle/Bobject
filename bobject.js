@@ -19,10 +19,10 @@
       handle_super.call( this );
       if ( typeof obj.initialize === 'function' ) obj.initialize.apply( this, arguments );
     };
-    this.Class.prototype        = {};
-    this.Class.prototype.Static = this.Class.prototype;
-    this.Class.prototype.bind   = this.bind;
-    this.Class.prototype.constructor = this.Class;
+    this.Class.prototype              = this.get_prototype( obj );
+    this.Class.prototype.Static       = this.Class.prototype;
+    this.Class.prototype.bind         = this.bind;
+    this.Class.prototype.constructor  = this.Class;
 
     each.call( this, obj, function ( key, val ) {
       this.Class.prototype[ key ] = val;
@@ -34,6 +34,12 @@
   };
 
   Bobject.prototype = {
+    get_prototype: function ( obj ) {
+      if ( !obj.Extends ) return new BaseObject();
+      else if ( obj.Extends instanceof BaseObject ) return new obj.Extends( new ExtendedArgs() );
+      else if ( obj.Extends.prototype ) return new obj.Extends();
+      else return clone( obj.Extends );
+    },
     bind: function ( method ) {
       return bind( this, method );
     },
@@ -41,8 +47,7 @@
       Super = Super.prototype || Super;
       this.Class.prototype.Super = function () { Super.initialize && Super.initialize.apply( this, arguments ); };
       each.call( this, Super, function ( key, val ) {
-        if ( !this.Class.prototype.hasOwnProperty( key ) ) this.Class.prototype[ key ] = val;
-        else this.Class.prototype.Super[ key ] = val;
+        this.Class.prototype.Super[ key ] = val;
       } );
     }
   };

@@ -123,6 +123,14 @@ describe( 'Bobjects', function () {
       expect( moose.get_type() ).toBe( 'mouse' );
     } );
 
+    it( 'should be an instance of Moose', function () {
+      expect( moose instanceof Moose ).toBe( true );
+    } );
+
+    it( 'should be an instance of Animal', function () {
+      expect( moose instanceof Animal ).toBe( true );
+    } );
+
   } );
 
   describe( 'Static', function () {} );
