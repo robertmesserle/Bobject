@@ -3,7 +3,7 @@ describe( 'Bobjects', function () {
   describe( 'Basic Functionality', function () {
 
     var Animal = new Bobject( {
-      constructor: function ( type ) {
+      initialize: function ( type ) {
         this.type = type;
       }
     } );
@@ -21,7 +21,7 @@ describe( 'Bobjects', function () {
 
       var Animal = new Bobject( {
         Bind: true,
-        constructor: function ( type ) { this.type = type; },
+        initialize: function ( type ) { this.type = type; },
         get_type: function () { return this.type; }
       } );
       var moose = new Animal( 'moose' );
@@ -41,7 +41,7 @@ describe( 'Bobjects', function () {
 
       var Animal = new Bobject( {
         Bind: 'get_type',
-        constructor: function ( type ) { this.type = type; },
+        initialize: function ( type ) { this.type = type; },
         get_type: function () { return this.type; }
       } );
       var moose = new Animal( 'moose' );
@@ -61,7 +61,7 @@ describe( 'Bobjects', function () {
 
       var Animal = new Bobject( {
         Bind: [ 'get_type' ],
-        constructor: function ( type ) { this.type = type; },
+        initialize: function ( type ) { this.type = type; },
         get_type: function () { return this.type; }
       } );
       var moose = new Animal( 'moose' );
@@ -82,7 +82,7 @@ describe( 'Bobjects', function () {
   describe( 'Extends', function () {
 
     var Animal = new Bobject( {
-      constructor: function () {
+      initialize: function () {
         this.animal = true;
       },
       set_type: function ( type ) {
@@ -95,7 +95,7 @@ describe( 'Bobjects', function () {
 
     var Moose = new Bobject( {
       Extends: Animal,
-      constructor: function () {
+      initialize: function () {
         this.Super();
         this.type = 'moose';
       },
