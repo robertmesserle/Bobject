@@ -19,10 +19,14 @@
       handle_super.call( this );
       if ( typeof obj.initialize === 'function' ) obj.initialize.apply( this, arguments );
     };
-    this.Class.prototype        = clone( obj );
+    this.Class.prototype        = {};
     this.Class.prototype.Static = this.Class.prototype;
     this.Class.prototype.bind   = this.bind;
     this.Class.prototype.constructor = this.Class;
+
+    each.call( this, obj, function ( key, val ) {
+      this.Class.prototype[ key ] = val;
+    } );
 
     if ( obj.Extends ) this.extend( obj.Extends );
 
