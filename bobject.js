@@ -38,7 +38,7 @@
       if ( !obj.Extends ) return new BaseObject();
       else if ( obj.Extends instanceof BaseObject ) return new obj.Extends( new ExtendedArgs() );
       else if ( obj.Extends.prototype ) return new obj.Extends();
-      else return clone( obj.Extends );
+      else return Object.create( obj.Extends );
     },
     bind: function ( method ) {
       return bind( this, method );
@@ -57,6 +57,36 @@
   window.Bobject = Bobject;
 
   //-- utility functions
+
+  Object.create || ( Object.create = ( function () {
+    function Obj () {}
+    return function ( proto ) {
+      Obj.prototype = proto;
+      return new Obj;
+    };
+  } )() );
+
+  if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function forEach(fun /*, thisp*/) {
+      var self = toObject(this),
+        thisp = arguments[1],
+        i = -1,
+        length = self.length >>> 0;
+
+      // If no callback function or if callback is not a callable function
+      if (_toString(fun) != "[object Function]") {
+        throw new TypeError(); // TODO message
+      }
+
+      while (++i < length) {
+        if (i in self) {
+          // Invoke the callback function with call, passing arguments:
+          // context, property value, property key, thisArg object context
+          fun.call(thisp, self[i], i, self);
+        }
+      }
+    };
+  }
 
   function handle_super () {
     each.call( this, this.Super, function ( key, val ) { this.Super[ key ] = this.bind( val ) } );
@@ -87,19 +117,6 @@
   function each ( obj, callback ) {
     if ( obj instanceof Array ) for ( var i = 0, len = obj.length; i < len; i++ ) callback.call( this, i, obj[ i ] );
     else for ( var key in obj ) if ( obj.hasOwnProperty( key ) ) callback.call( this, key, obj[ key ] );
-  }
-
-  function clone ( obj ) {
-    return typeof obj === 'object' ? clone_object( obj ) : obj;
-  }
-
-  function clone_object ( obj ) {
-    var ret = obj instanceof Array ? [] : {};
-    each( obj, function ( key, val ) {
-      if ( typeof val === 'object' ) ret[ key ] = clone( val );
-      else ret[ key ] = val;
-    } );
-    return ret;
   }
 
 } )();

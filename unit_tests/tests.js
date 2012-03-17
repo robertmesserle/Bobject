@@ -131,6 +131,20 @@ describe( 'Bobjects', function () {
       expect( moose instanceof Animal ).toBe( true );
     } );
 
+    it( 'should work with a hash', function () {
+      var Moose = new Bobject( {
+        Extends: {
+          get_type: function () { return this.type; }
+        },
+        initialize: function () {
+          this.type = 'moose';
+        }
+      } );
+      var moose = new Moose();
+
+      expect( moose.get_type() ).toBe( 'moose' );
+    } );
+
   } );
 
   describe( 'Static', function () {} );
