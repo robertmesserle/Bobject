@@ -149,4 +149,20 @@ describe( 'Bobjects', function () {
 
   describe( 'Static', function () {} );
 
+  describe( 'Bobject.create()', function () {
+
+    var Animal = new Bobject( {
+      initialize: function ( type ) {
+        this.type = type;
+      }
+    } );
+
+    var moose = Animal.create( 'moose' );
+
+    it ( 'should have a type of "moose"', function () {
+      expect( moose.type ).toBe( 'moose' );
+    } );
+
+  } );
+
 } );

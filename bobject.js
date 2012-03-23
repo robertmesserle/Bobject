@@ -23,6 +23,7 @@
     this.Class.prototype.Static       = this.Class.prototype;
     this.Class.prototype.bind         = this.bind;
     this.Class.prototype.constructor  = this.Class;
+    this.Class.create                 = this.create;
 
     each.call( this, obj, function ( key, val ) {
       this.Class.prototype[ key ] = val;
@@ -39,6 +40,11 @@
       else if ( obj.Extends instanceof BaseObject ) return new obj.Extends( new ExtendedArgs() );
       else if ( obj.Extends.prototype ) return new obj.Extends();
       else return Object.create( obj.Extends );
+    },
+    create: function () {
+      var obj = new this( new ExtendedArgs() );
+      this.apply( obj, arguments );
+      return obj;
     },
     bind: function ( method ) {
       return bind( this, method );
