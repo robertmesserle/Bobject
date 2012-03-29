@@ -6,7 +6,7 @@ Bobject is a helper for creating classes in JavaScript.  It cleans up the protot
 
 ```javascript
 var Animal = new Bobject( {
-  constructor: function ( type ) {
+  initialize: function ( type ) {
     this.type = type;
   },
   getType: function () {
@@ -38,14 +38,14 @@ Along with just cleaning up the syntax a little, Bobject adds some nice features
 
 ```javascript
 var Animal = new Bobject( {
-  constructor: function () {
+  initialize: function () {
     this.animal = true;
   }
 } );
 
 var Donkey = new Bobject( {
   Extends: Animal,
-  constructor: function () {
+  initialize: function () {
     this.Super(); // calls the Animal constructor
     this.type = 'donkey';
   }
@@ -69,7 +69,7 @@ Bobject provides you with a few options using the ```Bind``` property.
 ```javascript
 var Animal = new Bobject( {
   Bind: 'getType',
-  constructor: function ( type ) {
+  initialize: function ( type ) {
     this.type = type;
   },
   getType: function () {
