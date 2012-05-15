@@ -2,6 +2,10 @@
 
 Bobject is a helper for creating classes in JavaScript.  It cleans up the prototype mess and leaves you with simpler, more readable code.
 
+## Dependencies
+
+Bobject utilizes ECMAScript 5 features that are not available in all browsers (IE8 and earlier).  In order to use Bobject with older browsers, please include the [ES5 Shim](https://github.com/kriskowal/es5-shim).
+
 ## Basic Usage
 
 ```javascript
